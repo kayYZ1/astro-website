@@ -2,8 +2,10 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/Container.astro';
-import { readingTime } from '@lib/utils';
 import BackToPrev from '@components/BackToPrev.astro';
+import FormattedDate from '@components/FormattedDate.astro';
+
+import { readingTime } from '@lib/utils';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('posts'))
@@ -30,7 +32,7 @@ const { Content } = await post.render();
 		<div class='space-y-1 my-10'>
 			<div class='animate flex items-center gap-1.5'>
 				<div class='font-base text-sm'>
-					{post.data.date}
+					<FormattedDate date={post.data.date} />
 				</div>
 				&bull;
 				<div class='font-base text-sm'>
